@@ -1,0 +1,34 @@
+{
+  "name": "mybrand-backend",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElissaDesign/MyBrand-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ElissaDesign/MyBrand-Backend/issues"
+  },
+  "homepage": "https://github.com/ElissaDesign/MyBrand-Backend#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.10",
+    "multer": "^1.4.4"
+  }
+}
