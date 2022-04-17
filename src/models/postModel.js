@@ -13,6 +13,14 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    comment: {
+        type: Array,
+        default:[],
+    },
+    likes: {
+        type: Array,
+        default:[]
+    }
 },
 {
     timestamps: true,

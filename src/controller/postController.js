@@ -16,7 +16,17 @@ const createPost = async (req,  res) => {
         body:req.body.body
     })
     res.status(201).json({ post })
-}
+};
+
+
+const createComment = async (req,  res) => {
+    const post = await posts.findByIdAndUpdate({_id: req.params.id }, { $push: {comment: req.body.comment} } );
+    if(post){
+        res.status(200).json(post);
+    }else{
+        res.status(403).json("Comment can't be added");
+    };
+};
 
 
 
@@ -71,4 +81,4 @@ const deletePost = async (req, res) => {
 }
 
 
-export { getAllPosts, createPost, getSinglePost,updatePost,deletePost };
+export { getAllPosts, createPost, getSinglePost,updatePost,deletePost, createComment };

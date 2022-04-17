@@ -2,6 +2,7 @@
 import express from "express";
 import postRouter from "./routes/postRoute.js";
 import messageRouter from "./routes/messageRoute.js";
+import commentRoute from "./routes/commentRoute.js";
 import userRoute from "./routes/userRoute.js";
 import router from "./routes/auth.js"
 import "./dbConnect/monoConnect.js";
@@ -27,6 +28,8 @@ app.post("/api/upload", upload.single("file"), (req, res) =>{
 app.use('/api/posts', postRouter );
 
 app.use('/api/messages', messageRouter );
+
+app.use('/api/comments', commentRoute );
 
 app.use('/api/users', userRoute );
 
