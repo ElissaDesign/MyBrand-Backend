@@ -6,24 +6,10 @@ import commentRoute from "./routes/commentRoute.js";
 import userRoute from "./routes/userRoute.js";
 import router from "./routes/auth.js"
 import "./dbConnect/monoConnect.js";
-import multer from "multer";
 const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) =>{
-        cb(null, "images");
-    }, 
-    filename: (req, file, cb) =>{
-        cb(null, "test.png");
-    },
-});
-
-const upload = multer({storage: storage});
-app.post("/api/upload", upload.single("file"), (req, res) =>{
-    res.status(200).json('File has been uploaded');
-});
 
 app.use('/api/posts', postRouter );
 

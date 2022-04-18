@@ -1,4 +1,7 @@
+import fs from "fs";
+import cloudinary from "../imageconfig/cloudinary.js";
 import posts from "../models/postModel.js";
+
 
 const  getAllPosts = async (req, res) => {
     try {
@@ -10,12 +13,19 @@ const  getAllPosts = async (req, res) => {
 }
 
 const createPost = async (req,  res) => {
-    const post = await posts.create({
-        image:req.body.image, 
-        title:req.body.title, 
-        body:req.body.body
-    })
-    res.status(201).json({ post })
+    try {
+        const result = await cloudinary.uploader.upload(req.file.path);
+        const post = await posts.create({
+            image: result.url, 
+            title:req.body.title, 
+            body:req.body.body
+        })
+        res.status(201).json({ post })
+    } catch (error) {
+        console.log(error)
+    }
+
+    
 };
 
 
@@ -81,4 +91,4 @@ const deletePost = async (req, res) => {
 }
 
 
-export { getAllPosts, createPost, getSinglePost,updatePost,deletePost, createComment };
+export { getAllPosts, createPost, getSinglePost,updatePost,deletePost, createComment};

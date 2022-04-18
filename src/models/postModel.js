@@ -5,6 +5,9 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    cloudinary_id: {
+        type: String,
+    },
     title: {
         type: String,
         required: true,
@@ -17,10 +20,6 @@ const postSchema = new mongoose.Schema({
         type: Array,
         default:[],
     },
-    likes: {
-        type: Array,
-        default:[]
-    }
 },
 {
     timestamps: true,
