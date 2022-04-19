@@ -30,7 +30,7 @@ const createPost = async (req,  res) => {
 
 
 const createComment = async (req,  res) => {
-    const post = await posts.findByIdAndUpdate({_id: req.params.id }, { $push: {comment: req.body.comment} } );
+    const post = await posts.findByIdAndUpdate({_id: req.params.id }, {$push: {comment: req.body.comment} } );
     if(post){
         res.status(200).json(post);
     }else{

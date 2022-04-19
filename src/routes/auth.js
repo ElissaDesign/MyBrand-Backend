@@ -2,7 +2,18 @@ import express from "express";
 const router = express.Router();
 import users from "../models/userModel.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 import {registerValidation, loginValidation} from "../validator/userValidation.js"
+
+
+
+// get config vars
+dotenv.config();
+
+// access config var
+process.env.TOKEN_SECRET;
+
 
 
 //User Register
@@ -28,7 +39,19 @@ router.post("/register", async(req, res) =>{
                 password: hashedPass,
                 isAdmin: req.body.isAdmin,
             });
-    
+
+             // Create token
+                const token = jwt.sign(
+                { user_id: users._id, email },
+                process.env.TOKEN_KEY,
+                {
+                expiresIn: "2h",
+                }
+            );
+
+            // save user token
+                users.token = token;
+
             const user = await newUser.save();
             res.status(200).json("You are now registered, You can LogIn");
         } catch (error) {
@@ -53,6 +76,19 @@ router.post("/login", async (req, res) => {
         !validated && res.status(400).json("Wrong password!");
 
         const {password, ...others} = userlogin._doc;
+
+        // Create token
+      const token = jwt.sign(
+        { user_id: users._id, email },
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "2h",
+        }
+      );
+
+      // save user token
+      users.token = token;
+
         res.status(200).json(others);
     } catch (error) {
         res.status(500).json({msg: error});
