@@ -10,17 +10,17 @@ cloudinary.config({
     secure: true,
 });
 
-//  const uploads = (file, folder) => {
-//     return new Promise(resolve =>{
-//         cloudinary.UploadStream.upload(file, (result) =>{
-//             resolve({
-//                 url: result.url,
-//                 id: result.public_id
-//             });
-//         }, {
-//             resource_type: "auto",
-//             folder: folder
-//         })
-//     })
-// }
+ const uploads = (file, folder) => {
+    return new Promise(resolve =>{
+        cloudinary.UploadStream.upload(file, (result) =>{
+            resolve({
+                url: result.url,
+                id: result.public_id
+            });
+        }, {
+            resource_type: "auto",
+            folder: folder
+        })
+    })
+}
 export default cloudinary;

@@ -2,8 +2,8 @@ import express from "express";
 const router = express.Router();
 import users from "../models/userModel.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import jwt from "../validator/jwt.js";
 import {registerValidation, loginValidation} from "../validator/userValidation.js"
 
 
@@ -40,18 +40,6 @@ router.post("/register", async(req, res) =>{
                 isAdmin: req.body.isAdmin,
             });
 
-             // Create token
-                const token = jwt.sign(
-                { user_id: users._id, email },
-                process.env.TOKEN_KEY,
-                {
-                expiresIn: "2h",
-                }
-            );
-
-            // save user token
-                users.token = token;
-
             const user = await newUser.save();
             res.status(200).json("You are now registered, You can LogIn");
         } catch (error) {
@@ -78,18 +66,13 @@ router.post("/login", async (req, res) => {
         const {password, ...others} = userlogin._doc;
 
         // Create token
-      const token = jwt.sign(
-        { user_id: users._id, email },
-        process.env.TOKEN_KEY,
-        {
-          expiresIn: "2h",
-        }
-      );
+      const token = await jwt.signToken(userlogin);
 
       // save user token
-      users.token = token;
+      await userlogin.save();
+      userlogin.token = token;
 
-        res.status(200).json(others);
+        res.status(200).json({message: "You have successfully Logged in ", token});
     } catch (error) {
         res.status(500).json({msg: error});
     }

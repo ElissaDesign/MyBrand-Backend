@@ -1,4 +1,3 @@
-import fs from "fs";
 import cloudinary from "../imageconfig/cloudinary.js";
 import posts from "../models/postModel.js";
 
