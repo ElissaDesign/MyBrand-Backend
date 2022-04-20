@@ -5,7 +5,6 @@ import users from "../models/userModel.js";
 import posts from "../models/postModel.js";
 import chaiHttp from "chai-http";
 import mongoose from "mongoose";
-import { url } from "inspector";
 
 process.env.NODE_ENV = 'test'
 

@@ -9,4 +9,8 @@ postRouter.post('/', upload.single('image'), createPost);
 postRouter.route('/:id').get(getSinglePost).patch(updatePost).delete(deletePost);
 postRouter.patch('/:id/comment', createComment);
 
+
+
+
+
 export {postRouter as default};
