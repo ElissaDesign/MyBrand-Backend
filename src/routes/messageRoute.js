@@ -4,7 +4,37 @@ import { getAllMessages, getSingleMessage, createMessage, deleteMessage } from "
 
 const messageRouter = express.Router();
 
-messageRouter.route('/').get(getAllMessages).post(createMessage);
+
+
+/**
+ * @swagger
+ * /:
+ *  post:
+ *      description: Send a message
+ *      parameters:
+ *      - name: elissa
+ *        description: title of the book
+ *        in: formData
+ *        required: true
+ *        type: string
+ *      responses:
+ *          201:
+ *           Description: send message
+ */
+
+
+messageRouter.get('/', getAllMessages);
+/**
+ * @swagger
+ * /:
+ *  get:
+ *      description: "Get all Messages"
+ *      responses:
+ *          200:
+ *      Description: "Success"
+ */
+
+messageRouter.post('/', createMessage);
 
 messageRouter.route('/:id').get(getSingleMessage).delete(deleteMessage);
 
