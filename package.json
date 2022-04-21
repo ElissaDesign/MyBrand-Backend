@@ -1,0 +1,29 @@
+{
+  "name": "mybrand-backend",
+  "version": "1.0.0",
+  "description": "backend files for myBrand",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElissaDesign/MyBrand-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ElissaDesign/MyBrand-Backend/issues"
+  },
+  "homepage": "https://github.com/ElissaDesign/MyBrand-Backend#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
