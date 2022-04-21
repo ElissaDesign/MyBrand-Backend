@@ -1,0 +1,45 @@
+{
+  "name": "mybrand-backend",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha 'src/test/**/*.js' --recursive  --timeout 60000 --exit",
+    "start": "nodemon src/app",
+    "coverage": "nyc --reporter=text-summary --reporter=text --reporter=html npm run test"
+  },
+  "nyc":{
+    "include":"src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElissaDesign/MyBrand-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ElissaDesign/MyBrand-Backend/issues"
+  },
+  "homepage": "https://github.com/ElissaDesign/MyBrand-Backend#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2",
+    "nodemon": "^2.0.15",
+    "nyc": "^15.1.0"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcrypt": "^5.0.1",
+    "chai-http": "^4.3.0",
+    "cloudinary": "^1.29.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.10",
+    "multer": "^1.4.4"
+  }
+}

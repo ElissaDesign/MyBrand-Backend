@@ -1,1 +1,0 @@
-This RP contains Backend files for my (My-Brand-Portifolio) Done as a part of andela trainings
