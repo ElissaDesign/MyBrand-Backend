@@ -6,10 +6,14 @@ import userRoute from "./routes/userRoute.js";
 import router from "./routes/auth.js"
 import "./dbConnect/monoConnect.js";
 import swaggerUI from "swagger-ui-express";
-import swaggerJsDoc from "swagger-jsdoc";
-import swaggerDocs from "../swagger.js";
+import { readFile } from 'fs/promises';
+import cors from "cors";
+
+const swaggerDocs = JSON.parse(await readFile(new URL('./swagger.json', import.meta.url)));
+
 
 const app = express();
+app.use(cors())
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
 
@@ -26,7 +30,7 @@ app.use('/api/auth', router );
 
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
-console.log(swaggerDocs)
+// console.log(swaggerDocs)
 
 
 
