@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "babel 'src/app.js' -d dist",
+    "build": "babel src/app.js -d dist",
     "test": "mocha --require @babel/register 'src/test/**/*.js' --recursive  --timeout 60000 --exit  ",
     "start": "node dist/app.js",
     "dev": "nodemon --exec babel-node src/app.js",

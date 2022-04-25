@@ -42,7 +42,7 @@
     "http"
   ],
   "paths": {
-    "/api/posts": {
+    "/posts": {
       "get": {
         "tags": [
           "Posts"
@@ -61,61 +61,58 @@
             "description": "Invalid input"
           }
         }
-      }
-    },
-    "/messages": {
-      "get": {
+      },
+      "post": {
         "tags": [
-          "Messages"
+          "Posts"
         ],
-        "summary": "Get all posts",
-        "description": "Multiple status values can be provided with comma separated strings",
-        "operationId": "findPetsByStatus",
-        "produces": [
-          "application/xml",
+        "summary": "Creates a Blog",
+        "description": "This endpoints gets all posts in the database",
+        "consumes": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "status",
-            "in": "query",
-            "description": "Status values that need to be considered for filter",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "available",
-                "pending",
-                "sold"
-              ],
-              "default": "available"
-            },
-            "collectionFormat": "multi"
-          }
+        "produces": [
+          "application/json"
         ],
         "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Pet"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid status value"
+          "405": {
+            "description": "Invalid input"
           }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+        }
+      },
+      "patch": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Updates the Blog",
+        "description": "This endpoints gets all posts in the database",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
           }
-        ]
+        }
+      },
+      "delete": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Deletes the blog",
+        "description": "This endpoints posts a blog in the database",
+        "operationId": "post",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
       }
     },
     "/pet/findByTags": {
