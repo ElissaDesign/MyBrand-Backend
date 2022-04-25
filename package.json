@@ -5,15 +5,11 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "babel src/app.js -d dist",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "test": "nyc --reporter=html --reporter=text mocha --require @babel/register src/test/**/*.js --timeout 100000000 --exit",
-    "start": "node dist/app.js",
+    "build": "babel src/app.js -d src",
+    "test": "nyc --reporter=html --reporter=text mocha --require @babel/register src/test/*.test.js --timeout 100000000 --exit",
+    "start": "node src/app.js",
     "dev": "nodemon --exec babel-node src/app.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
-  },
-  "nyc": {
-    "include": "src"
   },
   "repository": {
     "type": "git",
