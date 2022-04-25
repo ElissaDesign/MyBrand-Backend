@@ -5,11 +5,12 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    
-    "test": "mocha --require @babel/register 'src/test/**/*.js' --recursive  --timeout 60000 --exit  ",
-    
+    "build": "babel src/app.js -d dist",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "test": "nyc --reporter=html --reporter=text mocha --require @babel/register src/test/**/*.js --timeout 100000000 --exit",
+    "start": "node dist/app.js",
     "dev": "nodemon --exec babel-node src/app.js",
-    "coverage": "nyc --reporter=text-summary --reporter=text --reporter=html npm run test"
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "nyc": {
     "include": "src"
@@ -30,7 +31,9 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/register": "^7.17.7",
     "chai": "^4.3.6",
+    "coveralls": "^3.1.1",
     "mocha": "^9.2.2",
+    "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^2.0.15",
     "nyc": "^15.1.0"
   },
