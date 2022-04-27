@@ -27,7 +27,6 @@ describe('posts', () => {
       chai.request(app)
           .get('/api/posts')
           .end((err, res) => {
-            console.log(res)
                 expect(res).to.have.status(200);
                 expect(res.body).to.have.property("post");
             done();

@@ -5,11 +5,21 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "coverageReporters": "json-summary",
     "build": "babel src/app.js -d src",
     "test": "nyc --reporter=html --reporter=text mocha --require @babel/register src/test/*.test.js --timeout 100000000 --exit",
     "start": "node src/app.js",
     "dev": "nodemon --exec babel-node src/app.js",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "make-badges": "istanbul-badges-readme"
+  },
+  "nyc": {
+    "extension": [
+      ".js"
+    ],
+    "reporter": [
+      "json-summary"
+    ],
+    "all": true
   },
   "repository": {
     "type": "git",
@@ -28,6 +38,7 @@
     "@babel/register": "^7.17.7",
     "chai": "^4.3.6",
     "coveralls": "^3.1.1",
+    "istanbul-badges-readme": "^1.8.1",
     "mocha": "^9.2.2",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^2.0.15",

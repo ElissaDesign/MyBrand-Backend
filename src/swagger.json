@@ -67,16 +67,40 @@
           "Posts"
         ],
         "summary": "Creates a Blog",
-        "description": "This endpoints gets all posts in the database",
+        "description": "This endpoint create posts in the database",
         "consumes": [
           "application/json"
         ],
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Posts",
+            "description": "The post to create.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "title"
+              ],
+              "properties": {
+                "image": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "body": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "405": {
-            "description": "Invalid input"
+          "201": {
+            "description": "Created"
           }
         }
       },
