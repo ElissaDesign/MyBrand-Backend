@@ -6,8 +6,8 @@
   "main": "index.js",
   "scripts": {
     "coverageReporters": "json-summary",
-    "build": "babel src/app.js -d src",
-    "test": "nyc --reporter=html --reporter=text --reporter=json-summary mocha --require @babel/register src/test/*.test.js --timeout 100000000 --exit",
+    "build": "npx babel src --out-dir  dist",
+    "test": "nyc --reporter=html --reporter=text --reporter=json-summary mocha --require @babel/register ./dist/test/test.js --timeout 100000000 --exit",
     "start": "node src/app.js",
     "dev": "nodemon --exec babel-node src/app.js",
     "make-badges": "node_modules/.bin/istanbul-badges-readme"
@@ -45,6 +45,7 @@
     "nyc": "^15.1.0"
   },
   "dependencies": {
+    "@babel/cli": "^7.17.6",
     "@hapi/joi": "^17.1.1",
     "@istanbuljs/esm-loader-hook": "^0.1.2",
     "bcrypt": "^5.0.1",
