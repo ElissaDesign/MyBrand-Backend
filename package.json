@@ -7,10 +7,10 @@
   "scripts": {
     "coverageReporters": "json-summary",
     "build": "babel src/app.js -d src",
-    "test": "nyc --reporter=html --reporter=text mocha --require @babel/register src/test/*.test.js --timeout 100000000 --exit",
+    "test": "nyc --reporter=html --reporter=text --reporter=json-summary mocha --require @babel/register src/test/*.test.js --timeout 100000000 --exit",
     "start": "node src/app.js",
     "dev": "nodemon --exec babel-node src/app.js",
-    "make-badges": "istanbul-badges-readme"
+    "make-badges": "node_modules/.bin/istanbul-badges-readme"
   },
   "nyc": {
     "extension": [
@@ -57,6 +57,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.10",
     "multer": "^1.4.4",
+    "supertest": "^6.2.3",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.3.0"
   }
