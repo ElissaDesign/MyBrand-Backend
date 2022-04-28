@@ -3,20 +3,29 @@ import app from "../app.js"
 import path  from "path";
 import users from "../models/userModel.js";
 import posts from "../models/postModel.js";
-import chaiHttp from "chai-http";
-import mongoose from "mongoose";
+import request from "chai-http";
 
 process.env.NODE_ENV = 'test'
 
 //Assertion   style
 
-chai.use(chaiHttp);
+chai.use(request);
 
 describe('posts', () => {
     beforeEach((done) => { //Before each test we empty the database
         users.deleteMany({}, (err) => { 
            done();           
         });        
+    });
+
+    // Posts a blog
+    describe('/POST /api/posts', () => {
+      it('Adds a post', (done) => {
+        chai.request(app)
+        .post('/api/posts')
+        .send({title: "Api testing rocks!", body: "it seems we are rocking it!"})
+        .expect(201, done)
+      })
     });
 
     /*
@@ -35,7 +44,7 @@ describe('posts', () => {
     });
 
 
-    describe('/PUT/:id posts', () => {
+    describe('/PUT /:id posts', () => {
       it('it should UPDATE a post given the id', (done) => {
           let post = new posts({title: "The Games of Narnia", body: "C.S. Lewis"})
           post.save((err, post) => {
@@ -54,7 +63,7 @@ describe('posts', () => {
   });
 
 
-  describe('/DELETE/:id posts', () => {
+  describe('DELETE /:id posts', () => {
     it('it should DELETE a post given the id', (done) => {
         let post = new posts({title: "The Chronicles of Narnia", body: "C.S. Lewis"})
         post.save((err, post) => {
@@ -91,7 +100,7 @@ describe('users', () => {
     /*
   * Test the /GET route
   */
-  describe('/GET users', () => {
+  describe('GET users', () => {
     it('it should GET all the Users', (done) => {
       chai.request(app)
           .get('/api/users')
@@ -104,7 +113,7 @@ describe('users', () => {
     });
 
 
-    describe('/PUT/:id users', () => {
+    describe('PUT /:id users', () => {
       it('it should UPDATE a user given the id', (done) => {
           let user = new users({name: "peter", email: "peter@gmail.com", password: "advanced"})
           user.save((err, user) => {
@@ -121,7 +130,7 @@ describe('users', () => {
           });
       });
   });
-    describe('/PUT/:id users', () => {
+    describe('PUT /:id users', () => {
       it('it should get error of 404 whilec UPDATING a user given the id', (done) => {
           let user = new users({name: "peter", email: "peter@gmail.com", password: "advanced"})
           user.save((err, user) => {
@@ -140,7 +149,7 @@ describe('users', () => {
   });
 
 
-  describe('/DELETE/:id users', () => {
+  describe('DELETE /:id users', () => {
     it('it should DELETE a user given the id', (done) => {
       let user = new users({name: "peter", email: "peter@gmail.com", password: "advanced"})
         user.save((err, user) => {

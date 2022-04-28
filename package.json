@@ -2,18 +2,26 @@
   "name": "mybrand-backend",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "babel src/app.js -d dist",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "test": "nyc --reporter=html --reporter=text mocha --require @babel/register src/test/**/*.js --timeout 100000000 --exit",
+    "coverageReporters": "json-summary",
+    "build": "npx babel src --out-dir  dist",
+    "test": "nyc --reporter=html --reporter=text --reporter=json-summary mocha --require @babel/register ./dist/test/test.js --timeout 100000000 --exit",
+    "test:cover": "npm run test -- --coverage",
+    "test:ci": "CI=TRUE npm run test:cover",
     "start": "node dist/app.js",
     "dev": "nodemon --exec babel-node src/app.js",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "make-badges": "node_modules/.bin/istanbul-badges-readme",
+    "make-badges:ci": "npm run make-badges -- --ci"
   },
   "nyc": {
-    "include": "src"
+    "extension": [
+      ".js"
+    ],
+    "reporter": [
+      "json-summary"
+    ],
+    "all": true
   },
   "repository": {
     "type": "git",
@@ -32,12 +40,14 @@
     "@babel/register": "^7.17.7",
     "chai": "^4.3.6",
     "coveralls": "^3.1.1",
+    "istanbul-badges-readme": "^1.8.1",
     "mocha": "^9.2.2",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^2.0.15",
     "nyc": "^15.1.0"
   },
   "dependencies": {
+    "@babel/cli": "^7.17.6",
     "@hapi/joi": "^17.1.1",
     "@istanbuljs/esm-loader-hook": "^0.1.2",
     "bcrypt": "^5.0.1",
@@ -50,6 +60,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.10",
     "multer": "^1.4.4",
+    "supertest": "^6.2.3",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.3.0"
   }

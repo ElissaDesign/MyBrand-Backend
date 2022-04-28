@@ -8,8 +8,9 @@ import "./dbConnect/monoConnect.js";
 import swaggerUI from "swagger-ui-express";
 import { readFile } from 'fs/promises';
 import cors from "cors";
+import swaggerDocs from "./swagger.json";
 
-const swaggerDocs = JSON.parse(await readFile(new URL('./swagger.json', import.meta.url)));
+// const swaggerDocs = JSON.parse(await readFile(new URL('./swagger.json', import.meta.url)));
 
 
 const app = express();
