@@ -6,7 +6,6 @@ import userRoute from "./routes/userRoute.js";
 import router from "./routes/auth.js"
 import "./dbConnect/monoConnect.js";
 import swaggerUI from "swagger-ui-express";
-import { readFile } from 'fs/promises';
 import cors from "cors";
 import swaggerDocs from "./swagger.json";
 
