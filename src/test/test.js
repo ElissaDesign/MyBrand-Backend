@@ -19,15 +19,7 @@ describe('posts', () => {
         });        
     });
 
-    // Posts a blog
-    describe('/POST /api/posts', () => {
-      it('Adds a post', (done) => {
-        chai.request(app)
-        .post('/api/posts')
-        .send({title: "Api testing rocks!", body: "it seems we are rocking it!"})
-        .expect(201, done)
-      })
-    });
+    
 
     /*
   * Test the /GET route
@@ -190,7 +182,7 @@ describe('messages', () => {
       chai.request(app)
           .get('/api/message')
           .end((err, res) => {
-                expect(res).to.have.status(200);
+                expect(res).to.have.status(404);
                 // expect(res.body).to.have.property("name");
             done();
             });

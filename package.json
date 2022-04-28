@@ -22,7 +22,8 @@
     "reporter": [
       "json-summary"
     ],
-    "all": true
+    "include":["dist/**/*.js"],
+    "exclude":["src"]
   },
   "repository": {
     "type": "git",

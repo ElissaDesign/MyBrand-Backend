@@ -38,7 +38,6 @@
     }
   ],
   "schemes": [
-    "https",
     "http"
   ],
   "paths": {
@@ -49,10 +48,7 @@
         ],
         "summary": "Gets a list of all Posts",
         "description": "This endpoints gets all posts in the database",
-        "operationId": "addPet",
-        "consumes": [
-          "application/json"
-        ],
+        "operationId": "addPost",
         "produces": [
           "application/json"
         ],
@@ -61,46 +57,73 @@
             "description": "Invalid input"
           }
         }
-      },
+      }
+    },
+    "/posts/": {
       "post": {
         "tags": [
           "Posts"
         ],
-        "summary": "Creates a Blog",
-        "description": "This endpoint create posts in the database",
+        "summary": "post an article",
+        "description": "",
         "consumes": [
-          "application/json"
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
         ],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "body",
-            "name": "Posts",
-            "description": "The post to create.",
-            "schema": {
-              "type": "object",
-              "required": [
-                "title"
-              ],
-              "properties": {
-                "image": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "body": {
-                  "type": "string"
-                }
-              }
-            }
+            "name": "title",
+            "in": "formData",
+            "description": "title of the blog",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "description": "description of the blog",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/posts/{id}": {
+      "get": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Creates a Blog",
+        "description": "This endpoint create posts in the database",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "This endpoint should get a post by id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/blog"
+              }
+            }
           }
         }
       },
@@ -110,14 +133,29 @@
         ],
         "summary": "Updates the Blog",
         "description": "This endpoints gets all posts in the database",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "This endpoint should get a post by id",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
-          "405": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/blog"
+              }
+            }
+          },
+          "400": {
             "description": "Invalid input"
           }
         }
@@ -132,8 +170,20 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "This endpoint should get a post by id",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
-          "405": {
+          "400": {
+            "description": "Created"
+          },
+          "404": {
             "description": "Invalid input"
           }
         }
@@ -434,7 +484,7 @@
             "description": "order placed for purchasing the pet",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Order"
+              "$ref": "#/definitions/blog"
             }
           }
         ],
@@ -442,7 +492,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/Order"
+              "$ref": "#/definitions/blog"
             }
           },
           "400": {
@@ -479,7 +529,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/Order"
+              "$ref": "#/definitions/blog"
             }
           },
           "400": {
@@ -813,56 +863,27 @@
     }
   },
   "definitions": {
-    "Order": {
+    "blog": {
       "type": "object",
       "properties": {
         "id": {
-          "type": "integer",
-          "format": "int64"
+          "type": "string"
         },
-        "petId": {
-          "type": "integer",
-          "format": "int64"
+        "image": {
+          "type": "string"
         },
-        "quantity": {
-          "type": "integer",
-          "format": "int32"
+        "title": {
+          "type": "integer"
         },
-        "shipDate": {
-          "type": "string",
-          "format": "date-time"
+        "body": {
+          "type": "string"
         },
-        "status": {
-          "type": "string",
-          "description": "Order Status",
-          "enum": [
-            "placed",
-            "approved",
-            "delivered"
-          ]
+        "date": {
+          "type": "string"
         },
-        "complete": {
-          "type": "boolean",
-          "default": false
-        }
-      },
-      "xml": {
-        "name": "Order"
-      }
-    },
-    "Category": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
+        "comment": {
           "type": "string"
         }
-      },
-      "xml": {
-        "name": "Category"
       }
     },
     "User": {
@@ -927,7 +948,7 @@
           "format": "int64"
         },
         "category": {
-          "$ref": "#/definitions/Category"
+          "$ref": "#/definitions/blog"
         },
         "name": {
           "type": "string",
