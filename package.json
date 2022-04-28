@@ -2,15 +2,17 @@
   "name": "mybrand-backend",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "coverageReporters": "json-summary",
     "build": "npx babel src --out-dir  dist",
     "test": "nyc --reporter=html --reporter=text --reporter=json-summary mocha --require @babel/register ./dist/test/test.js --timeout 100000000 --exit",
-    "start": "node src/app.js",
+    "test:cover": "npm run test -- --coverage",
+    "test:ci": "CI=TRUE npm run test:cover",
+    "start": "node dist/app.js",
     "dev": "nodemon --exec babel-node src/app.js",
-    "make-badges": "node_modules/.bin/istanbul-badges-readme"
+    "make-badges": "node_modules/.bin/istanbul-badges-readme",
+    "make-badges:ci": "npm run make-badges -- --ci"
   },
   "nyc": {
     "extension": [
