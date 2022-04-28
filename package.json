@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "coverageReporters": "json-summary",
-    "build": "npx babel src --out-dir  dist",
+    "build": "npx babel src --out-dir  dist/ --copy-files",
     "test": "nyc --reporter=html --reporter=text --reporter=json-summary mocha --require @babel/register ./dist/test/test.js --timeout 100000000 --exit",
     "test:cover": "npm run test -- --coverage",
     "test:ci": "CI=TRUE npm run test:cover",
