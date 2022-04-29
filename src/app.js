@@ -1,4 +1,5 @@
-
+import  dotenv from "dotenv";
+dotenv.config()
 import express from "express";
 import postRouter from "./routes/postRoute.js";
 import messageRouter from "./routes/messageRoute.js";
@@ -11,6 +12,7 @@ import swaggerDocs from "./swagger.json";
 
 // const swaggerDocs = JSON.parse(await readFile(new URL('./swagger.json', import.meta.url)));
 
+const {PORT=1000}=process.env;
 
 const app = express();
 app.use(cors())
@@ -43,7 +45,7 @@ app.get('/', (req, res) =>{
     res.send('Welcome to my Page');
 })
 
-app.listen(1000, () => {
+app.listen(PORT, () => {
     console.log("server at http://localhost:1000");
 });
 
