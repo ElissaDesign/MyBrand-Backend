@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
-import { MONGO_URL } from "../url/mongodburl.js";
 
-mongoose.connect(MONGO_URL, {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });

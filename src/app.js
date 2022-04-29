@@ -1,4 +1,5 @@
 import  dotenv from "dotenv";
+dotenv.config()
 import express from "express";
 import postRouter from "./routes/postRoute.js";
 import messageRouter from "./routes/messageRoute.js";
@@ -10,7 +11,7 @@ import cors from "cors";
 import swaggerDocs from "./swagger.json";
 
 // const swaggerDocs = JSON.parse(await readFile(new URL('./swagger.json', import.meta.url)));
-dotenv.config()
+
 const {PORT=1000}=process.env;
 
 const app = express();
